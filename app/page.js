@@ -2,14 +2,20 @@ import HeroSection from "@/components/Home/HeroSection";
 import PopularMovies from "@/components/Home/PopularMovies";
 import TopRatedMovies from "@/components/Home/TopRatedMovies";
 import TrendingMovies from "@/components/Home/TrendingMovies";
-import Navbar from "@/components/Navbar";
 
-export default function HomePage() {
+const fetchMovies = async () => {
+  const res = await fetch(`http://localhost:3000/api/movies`);
+
+  if (!res.ok) throw new Error("Failed to fetch movies");
+
+  return res.json();
+};
+
+export default async function HomePage() {
+  const data = await fetchMovies();
+  console.log(data.results.length);
   return (
     <div className="bg-black text-white">
-      {/* Navigation */}
-      <Navbar />
-
       {/* Hero Section  */}
       <HeroSection />
 
