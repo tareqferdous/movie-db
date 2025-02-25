@@ -1,0 +1,9 @@
+export const formatDateToFullString = (dateString) => {
+  const date = new Date(dateString);
+  if (isNaN(date)) {
+    throw new Error("Invalid date");
+  }
+
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
+};

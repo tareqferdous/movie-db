@@ -1,17 +1,25 @@
-const MovieCard = () => {
+import Image from "next/image";
+import Link from "next/link";
+
+const MovieCard = ({ movie }) => {
+  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
   return (
     <div className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform">
-      <a href="details.html">
-        <img
-          src="https://image.tmdb.org/t/p/original/ht8Uv9QPv9y7K0RvUyJIaXOZTfd.jpg"
-          alt="Smile 2"
+      <Link href={`/movie/${movie?.id}`}>
+        <Image
+          src={`${IMAGE_BASE_URL}${movie?.poster_path}`}
+          alt={movie?.original_title}
+          width={500}
+          height={500}
           className="w-full rounded-lg"
         />
         <div className="mt-2">
-          <h3 className="text-light text-sm font-bold truncate">Smile 2</h3>
-          <p className="text-primary text-xs">2023</p>
+          <h3 className="text-light text-sm font-bold truncate">
+            {movie?.original_title}
+          </h3>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

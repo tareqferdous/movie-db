@@ -1,6 +1,6 @@
 export async function GET(request) {
   try {
-    const response = fetch(`
+    const response = await fetch(`
         https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_API_KEY}`);
 
     if (!response.ok) {
@@ -9,7 +9,9 @@ export async function GET(request) {
         headers: { "Content-Type": "application/json" },
       });
     }
-    return new Response(JSON.stringify(response), {
+
+    const data = await response.json();
+    return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
