@@ -7,3 +7,11 @@ export const formatDateToFullString = (dateString) => {
   const options = { day: "numeric", month: "long", year: "numeric" };
   return date.toLocaleDateString("en-US", options);
 };
+
+export default function wait(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}

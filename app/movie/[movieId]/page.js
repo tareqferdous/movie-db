@@ -1,4 +1,5 @@
 import CastList from "@/components/details/CastList";
+import FallbackSkeleton from "@/components/details/FallbackSkeleton";
 import MovieGenres from "@/components/details/MovieGenres";
 import SimilarMovieList from "@/components/details/SimilarMovieList";
 import SocialButtons from "@/components/details/SocialButtons";
@@ -77,13 +78,7 @@ const MovieDetailsPage = async ({ params: { movieId } }) => {
       {/* Similar Movies Section  */}
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-4">More Like This</h2>
-        <Suspense
-          fallback={
-            <p className="text-white text-center text-4xl">
-              Loading related movies...
-            </p>
-          }
-        >
+        <Suspense fallback={<FallbackSkeleton />}>
           <SimilarMovieList similarMoviePromise={similarMoviePromise} />
         </Suspense>
       </div>
