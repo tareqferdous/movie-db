@@ -9,3 +9,11 @@ export const createUser = async (user) => {
     console.log(error);
   }
 };
+
+export async function findUserByCredentials(credentials) {
+  const user = await userModel.findOne(credentials).lean();
+  if (user) {
+    return user;
+  }
+  return null;
+}

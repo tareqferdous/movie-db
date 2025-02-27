@@ -7,7 +7,7 @@ const SearchResultPage = () => {
       <main className="container mx-auto px-4 pt-24 pb-8">
         {/* Search Stats  */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Search Results for "Avatar"</h1>
+          <h1 className="text-2xl font-bold">Search Results for - Avatar</h1>
           <p className="text-gray-400">Found 48 results</p>
         </div>
 

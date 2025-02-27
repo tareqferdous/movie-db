@@ -1,22 +1,27 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const SearchMovieCard = () => {
   return (
-    <a
-      href="details.html"
-      class="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform"
+    <Link
+      href={"/"}
+      className="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform"
     >
-      <img
+      <Image
         src="https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg"
         alt="Avatar: The Way of Water"
-        class="w-full aspect-[2/3] object-cover"
+        width={400}
+        height={400}
+        className="w-full aspect-[2/3] object-cover"
       />
-      <div class="p-4">
-        <h3 class="font-bold mb-2">Avatar: The Way of Water</h3>
-        <div class="flex justify-between text-sm text-gray-400">
+      <div className="p-4">
+        <h3 className="font-bold mb-2">Avatar: The Way of Water</h3>
+        <div className="flex justify-between text-sm text-gray-400">
           <span>2022</span>
           <span>⭐ 7.7</span>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

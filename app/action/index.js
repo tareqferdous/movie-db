@@ -1,6 +1,6 @@
 "use server";
 
-import { createUser } from "@/db/query";
+import { createUser, findUserByCredentials } from "@/db/query";
 import { userModel } from "@/models/user-model";
 import { dbConnect } from "@/services/mongo";
 import { redirect } from "next/navigation";
@@ -47,3 +47,19 @@ export const registerUser = async (formData) => {
     redirect("/login");
   }
 };
+
+export async function performLogin(formData) {
+  try {
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const user = {
+      email,
+      password,
+    };
+
+    const found = await findUserByCredentials(user);
+    return found;
+  } catch (error) {
+    throw error;
+  }
+}

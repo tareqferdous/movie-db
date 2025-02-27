@@ -1,7 +1,6 @@
 const HeroSection = () => {
   return (
     <div
-      id="hero"
       className="relative h-screen"
       style={{
         backgroundImage:
@@ -17,7 +16,7 @@ const HeroSection = () => {
         <p id="heroOverview" className="text-lg max-w-2xl mb-4">
           Eddie and Venom are on the run. Hunted by both of their worlds and
           with the net closing in, the duo are forced into a devastating
-          decision that will bring the curtains down on Venom and Eddie's last
+          decision that will bring the curtains down on Venom and Eddies last
           dance.
         </p>
         <button className="bg-white text-black px-8 py-2 rounded-lg font-bold hover:bg-opacity-80">

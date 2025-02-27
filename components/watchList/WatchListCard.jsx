@@ -1,9 +1,13 @@
+import Image from "next/image";
+
 const WatchListCard = () => {
   return (
     <div class="bg-moviedb-black rounded-lg overflow-hidden shadow-lg group relative">
-      <img
+      <Image
         src="https://image.tmdb.org/t/p/original/pnXLFioDeftqjlCVlRmXvIdMsdP.jpg"
         alt="Armor"
+        width={500}
+        height={500}
         class="w-full h-[450px] object-cover"
       />
       <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">

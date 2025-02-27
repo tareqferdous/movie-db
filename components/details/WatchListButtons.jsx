@@ -1,9 +1,39 @@
+"use client";
+import useAuth from "@/app/hooks/useAuth";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 const WatchListButtons = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { user } = useAuth();
+  const [location, setLocation] = useState(null);
+
+  console.log(pathname);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLocation(window.location.href);
+    }
+  }, []);
+
+  console.log(user);
+
+  const handleWatchLater = () => {
+    if (!user?.email) {
+      router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
+    } else {
+      console.log("Added to Watch Later");
+    }
+  };
   return (
     <div className="mb-6">
       <div className="flex flex-wrap gap-4">
         <div className="text-center">
-          <button className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg">
+          <button
+            onClick={handleWatchLater}
+            className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
