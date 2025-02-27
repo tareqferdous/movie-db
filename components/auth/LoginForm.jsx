@@ -8,7 +8,6 @@ const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const { auth, setAuth } = useAuth();
-  console.log(auth);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -17,7 +16,7 @@ const LoginForm = () => {
       const loggedInUser = await performLogin(formData);
       if (loggedInUser) {
         setAuth(loggedInUser);
-        // router.push("/");
+        router.back();
       } else {
         setError("Please provide a valid login credential");
       }

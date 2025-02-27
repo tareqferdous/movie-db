@@ -1,27 +1,14 @@
 "use client";
 import useAuth from "@/app/hooks/useAuth";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const WatchListButtons = () => {
   const router = useRouter();
-  const pathname = usePathname();
-  const { user } = useAuth();
-  const [location, setLocation] = useState(null);
-
-  console.log(pathname);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setLocation(window.location.href);
-    }
-  }, []);
-
-  console.log(user);
+  const { auth } = useAuth();
 
   const handleWatchLater = () => {
-    if (!user?.email) {
-      router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
+    if (!auth?.email) {
+      router.push(`/login`);
     } else {
       console.log("Added to Watch Later");
     }
