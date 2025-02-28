@@ -28,3 +28,14 @@ export const createWatchLst = async (movie) => {
     console.log(error);
   }
 };
+
+export const getWatchList = async (userId) => {
+  try {
+    console.log("userId", userId);
+    const lists = await WatchListModel.find({ userId });
+    console.log("lists", lists);
+    return lists;
+  } catch (error) {
+    console.log(error);
+  }
+};

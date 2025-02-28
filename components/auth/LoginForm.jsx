@@ -16,7 +16,7 @@ const LoginForm = () => {
       const loggedInUser = await performLogin(formData);
       if (loggedInUser) {
         setAuth(loggedInUser);
-        router.back();
+        // router.back();
       } else {
         setError("Please provide a valid login credential");
       }

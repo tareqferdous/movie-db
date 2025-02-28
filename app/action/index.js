@@ -1,6 +1,11 @@
 "use server";
 
-import { createUser, createWatchLst, findUserByCredentials } from "@/db/query";
+import {
+  createUser,
+  createWatchLst,
+  findUserByCredentials,
+  getWatchList,
+} from "@/db/query";
 import { userModel } from "@/models/user-model";
 import { WatchListModel } from "@/models/watch-list-model";
 import { dbConnect } from "@/services/mongo";
@@ -76,5 +81,16 @@ export const addMovieToWatchList = async (movieInfo) => {
     return { message: "Added to Watchlist" };
   } catch (error) {
     return { message: "Error adding movie" };
+  }
+};
+
+export const getWatchListMovies = async (email) => {
+  console.log(email);
+  try {
+    const movies = await getWatchList(email);
+    console.log(movies);
+    return movies;
+  } catch (error) {
+    throw error;
   }
 };

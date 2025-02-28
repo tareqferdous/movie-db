@@ -1,3 +1,4 @@
+"use client";
 import EmptyList from "@/components/watchList/EmptyList";
 import WatchListCard from "@/components/watchList/WatchListCard";
 
@@ -12,12 +13,8 @@ const WatchListPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {/* Movie Card Template  */}
-          <WatchListCard />
-          <WatchListCard />
-          <WatchListCard />
-        </div>
+        {/* Movie Card Template  */}
+        <WatchListCard />
 
         <EmptyList />
       </div>
