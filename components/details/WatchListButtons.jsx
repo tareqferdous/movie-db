@@ -1,16 +1,25 @@
 "use client";
+import { addMovieToWatchList } from "@/app/action";
 import useAuth from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
-const WatchListButtons = () => {
+const WatchListButtons = ({ movie }) => {
   const router = useRouter();
   const { auth } = useAuth();
 
-  const handleWatchLater = () => {
+  const handleWatchLater = async () => {
     if (!auth?.email) {
       router.push(`/login`);
     } else {
-      console.log("Added to Watch Later");
+      const movieInfo = {
+        userId: auth?.email,
+        movieId: movie?.id,
+        title: movie?.title,
+        poster: movie?.poster_path,
+      };
+      const response = await addMovieToWatchList(movieInfo);
+
+      console.log(response);
     }
   };
   return (
@@ -28,9 +37,9 @@ const WatchListButtons = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="icon icon-tabler icons-tabler-outline icon-tabler-file-plus"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -52,9 +61,9 @@ const WatchListButtons = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="icon icon-tabler icons-tabler-outline icon-tabler-checks"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />

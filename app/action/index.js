@@ -1,7 +1,8 @@
 "use server";
 
-import { createUser, findUserByCredentials } from "@/db/query";
+import { createUser, createWatchLst, findUserByCredentials } from "@/db/query";
 import { userModel } from "@/models/user-model";
+import { WatchListModel } from "@/models/watch-list-model";
 import { dbConnect } from "@/services/mongo";
 import { redirect } from "next/navigation";
 
@@ -63,3 +64,17 @@ export async function performLogin(formData) {
     throw error;
   }
 }
+
+export const addMovieToWatchList = async (movieInfo) => {
+  try {
+    await dbConnect();
+    const exist = await WatchListModel.findOne(movieInfo);
+    if (exist) {
+      return { message: "Already in watchList" };
+    }
+    const addedToWatchList = await createWatchLst(movieInfo);
+    return { message: "Added to Watchlist" };
+  } catch (error) {
+    return { message: "Error adding movie" };
+  }
+};
