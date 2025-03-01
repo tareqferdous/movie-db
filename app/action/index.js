@@ -3,12 +3,14 @@
 import {
   createUser,
   createWatchLst,
+  deleteWatchListMovie,
   findUserByCredentials,
   getWatchList,
 } from "@/db/query";
 import { userModel } from "@/models/user-model";
 import { WatchListModel } from "@/models/watch-list-model";
 import { dbConnect } from "@/services/mongo";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const registerUser = async (formData) => {
@@ -78,18 +80,30 @@ export const addMovieToWatchList = async (movieInfo) => {
       return { message: "Already in watchList" };
     }
     const addedToWatchList = await createWatchLst(movieInfo);
+    revalidatePath("/watch-list");
     return { message: "Added to Watchlist" };
   } catch (error) {
     return { message: "Error adding movie" };
   }
 };
 
-export const getWatchListMovies = async (email) => {
-  console.log(email);
+export const getWatchListMovies = async (userId) => {
   try {
-    const movies = await getWatchList(email);
-    console.log(movies);
+    await dbConnect();
+    const movies = await getWatchList(userId);
+    revalidatePath("/watch-list");
     return movies;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteMovie = async (id) => {
+  try {
+    await dbConnect();
+    const deletedMovie = await deleteWatchListMovie(id);
+    revalidatePath("/watch-list");
+    return deletedMovie;
   } catch (error) {
     throw error;
   }

@@ -14,8 +14,6 @@ const MovieDetailsPage = async ({ params: { movieId } }) => {
   const movieCredits = await fetchMovieCredits(movieId);
   const similarMoviePromise = fetchSimilarMovies(movieId);
 
-  console.log(movieInfo);
-
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
   return (
     <div className="bg-black text-white">
@@ -68,7 +66,7 @@ const MovieDetailsPage = async ({ params: { movieId } }) => {
                   IMAGE_BASE_URL={IMAGE_BASE_URL}
                 />
 
-                <WatchListButtons movie={movieInfo} />
+                <WatchListButtons movie={movieInfo} movieId={movieId} />
 
                 <SocialButtons />
               </div>
