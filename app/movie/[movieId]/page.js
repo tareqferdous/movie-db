@@ -9,6 +9,25 @@ import { formatDateToFullString } from "@/utils";
 import Image from "next/image";
 import { Suspense } from "react";
 
+export const generateMetadata = async ({ params: { movieId } }) => {
+  const movie = await fetchSingleMovie(movieId);
+  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+  return {
+    title: movie?.title,
+    description: movie?.overview,
+    openGraph: {
+      images: [`${IMAGE_BASE_URL}${movie?.poster_path}`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: movie?.title,
+      description: movie?.overview,
+      images: [`${IMAGE_BASE_URL}${movie?.poster_path}`],
+    },
+  };
+};
+
 const MovieDetailsPage = async ({ params: { movieId } }) => {
   const movieInfo = await fetchSingleMovie(movieId);
   const movieCredits = await fetchMovieCredits(movieId);
