@@ -1,36 +1,38 @@
 "use client";
+import MovieComparisonContainer from "@/components/compare/MovieComparisonContainer";
 import MovieHeader from "@/components/compare/MovieHeader";
 import MovieSearchModal from "@/components/compare/MovieSearchModal";
 import MovieSelection from "@/components/compare/MovieSelection";
+import { fetchSingleMovie } from "@/lib";
 import { useState } from "react";
 
 const MovieComparePage = () => {
   const [movieSlots, setMovieSlots] = useState([]);
   const [showMovieSearchModal, setShowMovieSearchModal] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
+  const [genres, setGenres] = useState(null);
 
   const addMovie = () => {
-    setMovieSlots([...movieSlots, { movie: null }]);
+    setMovieSlots([...movieSlots, null]);
   };
 
-  const removeMovieSlot = (id) => {
-    setMovieSlots(movieSlots.filter((_, i) => i !== id));
+  const removeMovieSlot = (index) => {
+    const remaining = movieSlots.filter((_, i) => i !== index);
+    setMovieSlots(remaining);
   };
 
-  const handleOpenSearchModal = (id) => {
-    setActiveSlot(id);
+  const handleOpenSearchModal = (index) => {
+    setActiveSlot(index);
     setShowMovieSearchModal(!showMovieSearchModal);
   };
 
-  const handleSelectMovie = (movie) => {
-    console.log(movie);
+  const handleSelectMovie = async (movie) => {
+    const movieDetails = await fetchSingleMovie(movie?.id);
     const updatedSlots = [...movieSlots];
-    updatedSlots[activeSlot].movie = movie;
+    updatedSlots[activeSlot] = movieDetails;
     setMovieSlots(updatedSlots);
     setShowMovieSearchModal(false);
   };
-
-  console.log("movieSlots", movieSlots);
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -40,27 +42,31 @@ const MovieComparePage = () => {
 
         {/* Movie Comparison Container  */}
         <div className="grid gap-6 md:grid-cols-2">
-          {/* <MovieComparisonContainer selectedMovie={selectedMovie} /> */}
-
-          <>
-            {" "}
-            {movieSlots.length > 0 &&
-              movieSlots.map((slot, index) => (
-                <MovieSelection
-                  key={slot}
-                  slot={index}
-                  removeMovieSlot={removeMovieSlot}
-                  handleSearchModal={handleOpenSearchModal}
-                />
-              ))}
-          </>
+          {movieSlots.map((movie, index) =>
+            movie ? (
+              <MovieComparisonContainer
+                key={index}
+                movie={movie}
+                removeMovieSlot={removeMovieSlot}
+                index={index}
+                genres={genres}
+              />
+            ) : (
+              <MovieSelection
+                key={index}
+                slot={movie}
+                removeMovieSlot={removeMovieSlot}
+                handleOpenSearchModal={handleOpenSearchModal}
+                index={index}
+              />
+            )
+          )}
         </div>
       </main>
 
       {/* Movie Search Modal  */}
       {showMovieSearchModal && (
         <MovieSearchModal
-          handleSearchModal={handleOpenSearchModal}
           setShowMovieSearchModal={setShowMovieSearchModal}
           handleSelectMovie={handleSelectMovie}
         />

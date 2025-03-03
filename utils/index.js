@@ -15,3 +15,7 @@ export default function wait(ms) {
     }, ms);
   });
 }
+
+export function toMillion(num) {
+  return (num / 1_000_000).toFixed(1) + "M";
+}

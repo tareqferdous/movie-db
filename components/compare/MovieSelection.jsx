@@ -1,9 +1,14 @@
-const MovieSelection = ({ slot, removeMovieSlot, handleSearchModal }) => {
+const MovieSelection = ({
+  slot,
+  removeMovieSlot,
+  handleOpenSearchModal,
+  index,
+}) => {
   return (
     <div className="bg-zinc-900 rounded-lg p-4 flex flex-col min-h-[400px]">
       <div className="flex justify-end mb-4">
         <button
-          onClick={() => removeMovieSlot(slot)}
+          onClick={() => removeMovieSlot(index)}
           className="text-gray-400 hover:text-white"
         >
           ✕
@@ -11,7 +16,7 @@ const MovieSelection = ({ slot, removeMovieSlot, handleSearchModal }) => {
       </div>
       <div className="flex-grow flex flex-col items-center justify-center">
         <button
-          onClick={() => handleSearchModal(slot)}
+          onClick={() => handleOpenSearchModal(index)}
           className="bg-zinc-800 text-white px-6 py-3 rounded hover:bg-zinc-700 transition-colors cursor-pointer"
         >
           Select Movie

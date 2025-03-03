@@ -5,11 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const MovieSearchModal = ({
-  handleSearchModal,
-  setShowMovieSearchModal,
-  handleSelectMovie,
-}) => {
+const MovieSearchModal = ({ setShowMovieSearchModal, handleSelectMovie }) => {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const { replace } = useRouter();
@@ -37,7 +33,7 @@ const MovieSearchModal = ({
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">Search Movie</h2>
           <button
-            onClick={handleSearchModal}
+            onClick={() => setShowMovieSearchModal(false)}
             className="text-gray-400 hover:text-white"
           >
             ✕
