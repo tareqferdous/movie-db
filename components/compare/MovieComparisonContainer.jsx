@@ -1,57 +1,61 @@
-const MovieComparisonContainer = () => {
+import Image from "next/image";
+
+const MovieComparisonContainer = ({ selectedMovie }) => {
+  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
   return (
-    <div class="bg-zinc-900 rounded-lg p-4 flex flex-col">
-      <div class="flex justify-end mb-4">
-        <button
-          onclick="removeSlot('slot-1732378356021')"
-          class="text-gray-400 hover:text-white"
-        >
-          ✕
-        </button>
+    <div className="bg-zinc-900 rounded-lg p-4 flex flex-col">
+      <div className="flex justify-end mb-4">
+        <button className="text-gray-400 hover:text-white">✕</button>
       </div>
-      <div class="grid grid-cols-5 gap-8">
-        <div class="col-span-2 h-full">
-          <img
-            src="https://image.tmdb.org/t/p/original/yfK7zxNL63VWfluFuoUaJj5PdNw.jpg"
-            alt="Snowden"
-            class="w-full rounded-lg mb-4 object-contain max-h-full"
+      <div className="grid grid-cols-5 gap-8">
+        <div className="col-span-2 h-full">
+          <Image
+            src={`${IMAGE_BASE_URL}${selectedMovie?.poster_path}`}
+            alt={selectedMovie?.title}
+            width={500}
+            height={500}
+            className="w-full rounded-lg mb-4 object-contain max-h-full"
           />
-          <h2 class="text-xl font-bold mb-2 text-center">Snowden</h2>
+          <h2 className="text-xl font-bold mb-2 text-center">
+            {selectedMovie?.title}
+          </h2>
         </div>
-        <div class="w-full space-y-4 col-span-3">
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Rating:</span>
-            <span class="float-right">7.1/10</span>
+        <div className="w-full space-y-4 col-span-3">
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Rating:</span>
+            <span className="float-right">
+              {selectedMovie?.vote_average}/10
+            </span>
           </div>
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Release Year:</span>
-            <span class="float-right">2016</span>
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Release Year:</span>
+            <span className="float-right">{selectedMovie?.release_date}</span>
           </div>
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Runtime:</span>
-            <span class="float-right">134 min</span>
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Runtime:</span>
+            <span className="float-right">134 min</span>
           </div>
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Budget:</span>
-            <span class="float-right">$40.0M</span>
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Budget:</span>
+            <span className="float-right">$40.0M</span>
           </div>
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Revenue:</span>
-            <span class="float-right">$37.4M</span>
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Revenue:</span>
+            <span className="float-right">$37.4M</span>
           </div>
-          <div class="bg-zinc-800 p-3 rounded">
-            <span class="text-gray-400">Genres:</span>
-            <div class="mt-2 flex flex-wrap gap-2">
-              <span class="bg-zinc-700 px-2 py-1 rounded-full text-sm">
+          <div className="bg-zinc-800 p-3 rounded">
+            <span className="text-gray-400">Genres:</span>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <span className="bg-zinc-700 px-2 py-1 rounded-full text-sm">
                 Drama{" "}
               </span>
-              <span class="bg-zinc-700 px-2 py-1 rounded-full text-sm">
+              <span className="bg-zinc-700 px-2 py-1 rounded-full text-sm">
                 History{" "}
               </span>
-              <span class="bg-zinc-700 px-2 py-1 rounded-full text-sm">
+              <span className="bg-zinc-700 px-2 py-1 rounded-full text-sm">
                 Crime{" "}
               </span>
-              <span class="bg-zinc-700 px-2 py-1 rounded-full text-sm">
+              <span className="bg-zinc-700 px-2 py-1 rounded-full text-sm">
                 Thriller
               </span>
             </div>

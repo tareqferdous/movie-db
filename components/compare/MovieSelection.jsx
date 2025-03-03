@@ -1,16 +1,21 @@
-const MovieSelection = () => {
+const MovieSelection = ({ slot, removeMovieSlot, handleSearchModal }) => {
   return (
-    <div class="bg-zinc-900 rounded-lg p-4 flex flex-col min-h-[400px]">
-      <div class="flex justify-end mb-4">
-        <button class="text-gray-400 hover:text-white">✕</button>
+    <div className="bg-zinc-900 rounded-lg p-4 flex flex-col min-h-[400px]">
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={() => removeMovieSlot(slot)}
+          className="text-gray-400 hover:text-white"
+        >
+          ✕
+        </button>
       </div>
-      <div class="flex-grow flex flex-col items-center justify-center">
-        <a
-          href="./search.html"
-          class="bg-zinc-800 text-white px-6 py-3 rounded hover:bg-zinc-700 transition-colors cursor-pointer"
+      <div className="flex-grow flex flex-col items-center justify-center">
+        <button
+          onClick={() => handleSearchModal(slot)}
+          className="bg-zinc-800 text-white px-6 py-3 rounded hover:bg-zinc-700 transition-colors cursor-pointer"
         >
           Select Movie
-        </a>
+        </button>
       </div>
     </div>
   );
