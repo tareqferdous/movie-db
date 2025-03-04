@@ -2,13 +2,9 @@
 
 import { fetchSearchMovies } from "@/lib";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const MovieSearchModal = ({ setShowMovieSearchModal, handleSelectMovie }) => {
-  const searchParams = useSearchParams();
-  const pathName = usePathname();
-  const { replace } = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
