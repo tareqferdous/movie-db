@@ -1,5 +1,10 @@
-import LoginForm from "@/components/auth/LoginForm";
+// import LoginForm from "@/components/auth/LoginForm";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+
+const LoginForm = dynamic(() => import("@/components/auth/LoginForm"), {
+  ssr: false,
+});
 
 const LoginPage = () => {
   return (
@@ -15,9 +20,9 @@ const LoginPage = () => {
               <input type="checkbox" className="mr-2" />
               Remember me
             </label>
-            <a href="#" className="hover:underline">
+            <Link href="#" className="hover:underline">
               Need help?
-            </a>
+            </Link>
           </div>
 
           <div className="mt-6 text-moviedb-gray">

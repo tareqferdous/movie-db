@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import SearchInput from "./SearchInput";
 
 const Navbar = () => {
@@ -22,7 +23,9 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        <SearchInput />
+        <Suspense>
+          <SearchInput />
+        </Suspense>
       </div>
     </nav>
   );

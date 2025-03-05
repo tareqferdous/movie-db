@@ -3,7 +3,7 @@ export async function GET(request, { params }) {
   try {
     // Fetch movie details
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}&append_to_response=videos`
     );
 
     if (!response.ok) {

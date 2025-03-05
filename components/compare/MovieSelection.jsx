@@ -1,9 +1,5 @@
-const MovieSelection = ({
-  slot,
-  removeMovieSlot,
-  handleOpenSearchModal,
-  index,
-}) => {
+"use client";
+const MovieSelection = ({ removeMovieSlot, handleOpenSearchModal, index }) => {
   return (
     <div className="bg-zinc-900 rounded-lg p-4 flex flex-col min-h-[400px]">
       <div className="flex justify-end mb-4">

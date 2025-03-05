@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 const EmptyList = () => {
   return (
-    <div className="hidden text-center py-16">
+    <div className=" text-center py-16">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-24 w-24 mx-auto text-moviedb-gray mb-4"
@@ -21,12 +23,12 @@ const EmptyList = () => {
       <p className="text-light/70 mb-6">
         Explore movies and add them to your list to watch later
       </p>
-      <a
-        href="#"
+      <Link
+        href="/"
         className="bg-primary text-dark px-6 py-2 rounded-full hover:bg-primary/80 transition"
       >
         Explore Movies
-      </a>
+      </Link>
     </div>
   );
 };

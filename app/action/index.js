@@ -108,14 +108,3 @@ export const deleteMovie = async (id) => {
     throw error;
   }
 };
-
-export async function getMovieDetails(movieId) {
-  try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}&append_to_response=videos`
-    );
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-}

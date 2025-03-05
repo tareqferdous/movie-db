@@ -1,6 +1,4 @@
-"use client";
-import EmptyList from "@/components/watchList/EmptyList";
-import WatchListCard from "@/components/watchList/WatchListCard";
+import WatchLists from "@/components/watchList/WatchLists";
 
 const WatchListPage = () => {
   return (
@@ -12,11 +10,7 @@ const WatchListPage = () => {
             Movies you have saved to watch in the future
           </p>
         </div>
-
-        {/* Movie Card Template  */}
-        <WatchListCard />
-
-        <EmptyList />
+        <WatchLists />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import RegistrationForm from "@/components/auth/RegistrationForm";
+import Link from "next/link";
 
 const RegistrationPage = () => {
   return (
@@ -13,9 +14,9 @@ const RegistrationPage = () => {
 
           <div className="mt-6 text-moviedb-gray">
             Already have an account?
-            <a href="#" className="text-white hover:underline">
+            <Link href="/login" className="text-white hover:underline">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,14 +1,7 @@
-"use client";
 import { formatDateToFullString, toMillion } from "@/utils";
 import Image from "next/image";
 
-const MovieComparisonContainer = ({
-  movie,
-  removeMovieSlot,
-  index,
-  genres,
-}) => {
-  console.log(movie);
+const MovieComparisonContainer = ({ movie, removeMovieSlot, index }) => {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
   return (

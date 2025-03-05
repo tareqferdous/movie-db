@@ -24,9 +24,10 @@ const LoginForm = () => {
       setError(error.message);
     }
   };
+
   return (
     <>
-      <form id="loginForm" className="space-y-4" onSubmit={handleLogin}>
+      <form className="space-y-4" onSubmit={handleLogin}>
         <input
           type="email"
           name="email"
@@ -49,9 +50,7 @@ const LoginForm = () => {
         </button>
       </form>
       {error && (
-        <p classNameName="text-red-600 text-center font-semibold pt-3">
-          {error}
-        </p>
+        <p className="text-red-600 text-center font-semibold pt-3">{error}</p>
       )}
     </>
   );

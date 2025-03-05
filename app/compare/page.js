@@ -1,16 +1,32 @@
 "use client";
-import MovieComparisonContainer from "@/components/compare/MovieComparisonContainer";
-import MovieHeader from "@/components/compare/MovieHeader";
-import MovieSearchModal from "@/components/compare/MovieSearchModal";
+// import MovieComparisonContainer from "@/components/compare/MovieComparisonContainer";
+// import MovieHeader from "@/components/compare/MovieHeader";
+// import MovieSearchModal from "@/components/compare/MovieSearchModal";
 import MovieSelection from "@/components/compare/MovieSelection";
 import { fetchSingleMovie } from "@/lib";
+import dynamic from "next/dynamic";
 import { useState } from "react";
+const MovieComparisonContainer = dynamic(
+  () => import("@/components/compare/MovieComparisonContainer"),
+  {
+    ssr: false,
+  }
+);
+const MovieHeader = dynamic(() => import("@/components/compare/MovieHeader"), {
+  ssr: false,
+});
+
+const MovieSearchModal = dynamic(
+  () => import("@/components/compare/MovieSearchModal"),
+  {
+    ssr: false,
+  }
+);
 
 const MovieComparePage = () => {
   const [movieSlots, setMovieSlots] = useState([]);
   const [showMovieSearchModal, setShowMovieSearchModal] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
-  const [genres, setGenres] = useState(null);
 
   const addMovie = () => {
     setMovieSlots([...movieSlots, null]);
@@ -49,12 +65,10 @@ const MovieComparePage = () => {
                 movie={movie}
                 removeMovieSlot={removeMovieSlot}
                 index={index}
-                genres={genres}
               />
             ) : (
               <MovieSelection
-                key={index}
-                slot={movie}
+                key={`${index + 1}`}
                 removeMovieSlot={removeMovieSlot}
                 handleOpenSearchModal={handleOpenSearchModal}
                 index={index}

@@ -1,21 +1,26 @@
 "use client";
 import SearchMovieCard from "@/components/searchPage/SearchMovieCard";
 import { fetchSearchMovies } from "@/lib";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const SearchResultPage = ({ searchParams: { query } }) => {
+const SearchResultPage = () => {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query");
   const [searchResults, setSearchResults] = useState([]);
 
+  console.log(query);
+
   useEffect(() => {
-    if (!query) {
-      setSearchResults([]);
-      return;
-    } else {
+    if (!query) return;
+    try {
       const fetchWatchList = async () => {
         const res = await fetchSearchMovies(query);
-        setSearchResults(res);
+        setSearchResults(res || []);
       };
       fetchWatchList();
+    } catch (error) {
+      console.error("Error fetching movies:", error);
     }
   }, [query]);
 

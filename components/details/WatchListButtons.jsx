@@ -35,7 +35,7 @@ const WatchListButtons = ({ movie, movieId }) => {
       };
       fetchWatchList();
     }
-  }, []);
+  }, [user?.email]);
 
   const watchListedMovie =
     watchList &&

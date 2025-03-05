@@ -20,6 +20,7 @@ const nextConfig = {
       },
     ],
   },
+  fallback: false,
 };
 
 export default nextConfig;
