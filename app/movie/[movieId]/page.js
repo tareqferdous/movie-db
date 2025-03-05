@@ -1,6 +1,8 @@
+import { getMovieDetails } from "@/app/action";
 import CastList from "@/components/details/CastList";
 import FallbackSkeleton from "@/components/details/FallbackSkeleton";
 import MovieGenres from "@/components/details/MovieGenres";
+import MovieTrailer from "@/components/details/MovieTrailer";
 import SimilarMovieList from "@/components/details/SimilarMovieList";
 import SocialButtons from "@/components/details/SocialButtons";
 import WatchListButtons from "@/components/details/WatchListButtons";
@@ -32,6 +34,16 @@ const MovieDetailsPage = async ({ params: { movieId } }) => {
   const movieInfo = await fetchSingleMovie(movieId);
   const movieCredits = await fetchMovieCredits(movieId);
   const similarMoviePromise = fetchSimilarMovies(movieId);
+
+  const singleMovie = await getMovieDetails(movieId);
+  console.log("singleMovie", singleMovie);
+
+  // Find the trailer in the videos array
+  const trailer = singleMovie.videos.results.find(
+    (video) => video.type === "Trailer"
+  );
+
+  console.log("trailer", trailer?.key);
 
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
   return (
@@ -88,6 +100,7 @@ const MovieDetailsPage = async ({ params: { movieId } }) => {
                 <WatchListButtons movie={movieInfo} movieId={movieId} />
 
                 <SocialButtons />
+                <MovieTrailer movieId={movieId} trailer={trailer?.key} />
               </div>
             </div>
           </div>

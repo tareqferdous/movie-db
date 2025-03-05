@@ -1,16 +1,17 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const SearchInput = () => {
-  const [query, setQuery] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") || "");
 
   useEffect(() => {
-    if (query.trim()) {
+    if (query) {
       router.push(`/search-result?query=${encodeURIComponent(query)}`);
     } else {
-      router.push("/search-result");
+      router.push("/");
     }
   }, [query, router]);
 

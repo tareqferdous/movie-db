@@ -77,13 +77,13 @@ export const addMovieToWatchList = async (movieInfo) => {
     await dbConnect();
     const exist = await WatchListModel.findOne(movieInfo);
     if (exist) {
-      return { message: "Already in watchList" };
+      return { message: "Already in watchList", status: "exists" };
     }
     const addedToWatchList = await createWatchLst(movieInfo);
     revalidatePath("/watch-list");
-    return { message: "Added to Watchlist" };
+    return { message: "Added to Watchlist", status: "ok" };
   } catch (error) {
-    return { message: "Error adding movie" };
+    return { message: "Error adding movie", status: "wrong" };
   }
 };
 
@@ -108,3 +108,14 @@ export const deleteMovie = async (id) => {
     throw error;
   }
 };
+
+export async function getMovieDetails(movieId) {
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}&append_to_response=videos`
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}

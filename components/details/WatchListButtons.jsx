@@ -6,27 +6,29 @@ import { useEffect, useState } from "react";
 
 const WatchListButtons = ({ movie, movieId }) => {
   const router = useRouter();
-  const { auth } = useAuth();
+  const { user } = useAuth();
   const [watchList, setWatchList] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleWatchLater = async () => {
-    if (!auth?.email) {
+    if (!user?.email) {
       router.push(`/login`);
     } else {
       const movieInfo = {
-        userId: auth?.email,
+        userId: user?.email,
         movieId: movie?.id,
         title: movie?.title,
         poster: movie?.poster_path,
       };
       const response = await addMovieToWatchList(movieInfo);
+      setMessage(response.status);
     }
   };
 
   useEffect(() => {
-    if (auth?.email) {
+    if (user?.email) {
       const fetchWatchList = async () => {
-        const res = await getWatchListMovies(auth?.email);
+        const res = await getWatchListMovies(user?.email);
         if (res.length > 0) {
           setWatchList(res);
         }
@@ -40,11 +42,15 @@ const WatchListButtons = ({ movie, movieId }) => {
     watchList.length > 0 &&
     watchList.find((movie) => movie.movieId === movieId);
 
+  const isAdded = message === "ok" || watchListedMovie;
+
+  const isNotAdded = message !== "ok" && !watchListedMovie;
+
   return (
     <div className="mb-6">
       <div className="flex flex-wrap gap-4">
         <div className="text-center">
-          {!watchListedMovie && (
+          {isNotAdded && (
             <button
               onClick={handleWatchLater}
               className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg"
@@ -73,7 +79,7 @@ const WatchListButtons = ({ movie, movieId }) => {
         </div>
 
         <div className="text-center">
-          {watchListedMovie && (
+          {isAdded && (
             <button className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-lg text-green-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

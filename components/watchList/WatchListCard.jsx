@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
 const WatchListCard = ({ userId }) => {
-  const { auth } = useAuth();
+  const { user } = useAuth();
   const [watchList, setWatchList] = useState(null);
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    if (auth?.email) {
+    if (user?.email) {
       const fetchWatchList = async () => {
-        const res = await getWatchListMovies(auth?.email);
+        const res = await getWatchListMovies(user?.email);
         if (res.length > 0) {
           setWatchList(res);
         }
