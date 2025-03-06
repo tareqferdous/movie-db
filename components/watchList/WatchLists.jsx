@@ -39,10 +39,14 @@ const WatchLists = () => {
     }
   };
 
-  console.log(watchList);
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div
+      className={
+        watchList &&
+        watchList.length > 0 &&
+        "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      }
+    >
       {watchList && watchList.length > 0 ? (
         watchList.map((movie) => (
           <WatchListCard

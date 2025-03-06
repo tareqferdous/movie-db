@@ -9,18 +9,15 @@ const SearchResultPage = () => {
   const query = searchParams.get("query");
   const [searchResults, setSearchResults] = useState([]);
 
-  console.log(query);
-
   useEffect(() => {
-    if (!query) return;
-    try {
+    if (!query) {
+      setSearchResults([]);
+    } else {
       const fetchWatchList = async () => {
         const res = await fetchSearchMovies(query);
         setSearchResults(res || []);
       };
       fetchWatchList();
-    } catch (error) {
-      console.error("Error fetching movies:", error);
     }
   }, [query]);
 

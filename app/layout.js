@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { dbConnect } from "@/services/mongo";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import "./globals.css";
 import AuthProvider from "./provider/AuthProvider";
 
@@ -28,8 +29,10 @@ export default async function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Navbar />
-          {children}
+          <Suspense>
+            <Navbar />
+            {children}
+          </Suspense>
         </AuthProvider>
       </body>
     </html>
