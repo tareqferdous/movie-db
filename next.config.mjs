@@ -7,20 +7,19 @@ const nextConfig = {
         hostname: "image.tmdb.org",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "facebook.com",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "x.com",
       },
       {
-        protocol: "http",
+        protocol: "https",
         hostname: "linkedin.com",
       },
     ],
   },
-  fallback: false,
 };
 
 export default nextConfig;
