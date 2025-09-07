@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const SocialButtons = () => {
   const pathname = usePathname();
-  const pageUrl = `http://localhost:3000/${pathname}`;
+  const pageUrl = `https://movie-db-swart-xi.vercel.app/${pathname}`;
 
   const text = "Checkout this movie!";
   return (
